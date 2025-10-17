@@ -1,0 +1,187 @@
+[
+  {
+    "name": "aider",
+    "version": "0.86.1_1",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "autoconf",
+    "version": "2.72",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "ca-certificates",
+    "version": "2025-09-09",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "certifi",
+    "version": "2025.10.5_1",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "cffi",
+    "version": "2.0.0_1",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "coreutils",
+    "version": "9.8",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "freetype",
+    "version": "2.14.1_1",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "gawk",
+    "version": "5.3.1",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "gcc",
+    "version": "15.2.0",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "gettext",
+    "version": "0.26",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "git",
+    "version": "2.51.0",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "gmp",
+    "version": "6.3.0",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "isl",
+    "version": "0.27",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "jpeg-turbo",
+    "version": "3.1.2",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "libmpc",
+    "version": "1.3.1",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "libpng",
+    "version": "1.6.50",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "libunistring",
+    "version": "1.4.1",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "libyaml",
+    "version": "0.2.5",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "lz4",
+    "version": "1.10.0",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "m4",
+    "version": "1.4.20",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "mpdecimal",
+    "version": "4.0.1",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "mpfr",
+    "version": "4.2.2",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "openblas",
+    "version": "0.3.30",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "openssl@3",
+    "version": "3.6.0",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "pcre2",
+    "version": "10.46",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "pkgconf",
+    "version": "2.5.1",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "poetry",
+    "version": "2.2.1",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "pycparser",
+    "version": "2.23_1",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "pyenv",
+    "version": "2.6.10",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "pyenv-virtualenv",
+    "version": "1.2.4",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "python@3.12",
+    "version": "3.12.12",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "python@3.13",
+    "version": "3.13.8",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "readline",
+    "version": "8.3.1",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "sqlite",
+    "version": "3.50.4",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "volta",
+    "version": "2.0.2",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "xz",
+    "version": "5.8.1",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "zstd",
+    "version": "1.5.7",
+    "tap": "homebrew/core"
+  }
+]

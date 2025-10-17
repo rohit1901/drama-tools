@@ -1,0 +1,57 @@
+{
+  "edit_predictions": {
+    "mode": "eager"
+  },
+  "agent": {
+    "default_profile": "ask",
+    "default_model": {
+      "provider": "ollama",
+      "model": "gpt-oss:20b"
+    },
+    "inline_assistant_model": {
+      "provider": "ollama",
+      "model": "gpt-oss:20b"
+    }
+  },
+  "language_models": {
+    "ollama": {
+      "api_url": "http://localhost:11434",
+      "available_models": [
+        {
+          "name": "qwen3-coder:30b",
+          "display_name": "qwen 3 coder 30b",
+          "max_tokens": 16384,
+          "supports_tools": true,
+          "supports_thinking": false,
+          "supports_images": true
+        },
+        {
+          "name": "gpt-oss:20b",
+          "display_name": "gpt-oss 20b",
+          "max_tokens": 16384,
+          "supports_tools": true,
+          "supports_thinking": true,
+          "supports_images": true
+        }
+      ]
+    }
+  },
+  "icon_theme": "Colored Zed Icons Theme Dark",
+  "base_keymap": "JetBrains",
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "system",
+    "light": "Ayu Mirage",
+    "dark": "Ayu Mirage"
+  },
+  "lsp": {
+    "basedpyright": {
+      "settings": {
+        "analysis": {
+          "typeCheckingMode": "off"
+        }
+      }
+    }
+  }
+}
