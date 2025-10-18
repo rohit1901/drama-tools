@@ -27,6 +27,10 @@ All of the files live under the `tools/` directory and can be copied into your o
 
 - `homebrew/formulae.json` is a list of Home‑brew formulae that I keep on my machine.
 - `homebrew/casks.json` is a list of Home‑brew casks that I keep on my machine.
+- `homebrew/formulae.txt` is a list of Home‑brew formulae that I keep on my machine.
+- `homebrew/casks.txt` is a list of Home‑brew casks that I keep on my machine.
+- `homebrew/brew.install.sh` is a script to install Homebrew formulae and casks.
+- `homebrew/brew.export.sh` is a script to export Homebrew formulae and casks.
 
 - `zed.settings.json` contains a sane default configuration for the [Zed](https://zed.dev/) editor.
 
@@ -40,10 +44,11 @@ All of the files live under the `tools/` directory and can be copied into your o
 git clone https://github.com/your-username/drama-tools.git
 ```
 
-### 2️⃣ Install Home‑brew dependencies
+### 2️⃣ Install Homebrew dependencies
 
 ```sh
-brew bundle --file=drama-tools/tools/brew.formulae.txt
+brew bundle --file=drama-tools/tools/homebrew/formulae.txt
+brew bundle --file=drama-tools/tools/homebrew/casks.txt
 ```
 
 > **Tip:** If you use a different Home‑brew directory or want to keep this repo separate from your own formulae, copy the file to the root of the Home‑brew directory and run `brew bundle` from there.

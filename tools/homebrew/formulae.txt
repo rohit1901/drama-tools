@@ -35,5 +35,3 @@ sqlite
 volta
 xz
 zstd
-gpg-suite
-maccy
