@@ -1,3 +1,17 @@
+export PATH="$HOME/.volta/bin:$PATH"
+
+# Python environment using pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+# app-hound ROOT
+export APP_HOUND_ROOT="$HOME/work/projects/private/app-hound"
+
+# Ollama
+export OLLAMA_API_BASE="http://127.0.0.1:11434"
+
 # Open shell profile using `oprc` command
 oprc() {
   local default_shell=$(basename "$SHELL")
@@ -101,14 +115,54 @@ aider-chat() {
   fi
 }
 
-
+# app-hound command to run app-hound [-h] [-i INPUT] [-o OUTPUT]
+app-hound() {
+    cd $APP_HOUND_ROOT
+    # Parse arguments app-hound [-h] [-i INPUT] [-o OUTPUT]
+    for arg in "$@"; do
+      case $arg in
+        -h|--help)
+          poetry run app-hound -h
+          return 0
+          ;;
+        -i|--input)
+          input_file="$2"
+          shift 2
+          ;;
+        -o|--output)
+          output_file="$2"
+          shift 2
+          ;;
+        -*)
+        # ignore other options
+        ;;
+      esac
+    done
+    if [[ -n "$input_file" && -n "$output_file" ]]; then
+      poetry run app-hound -i "$input_file" -o "$output_file"
+    elif [[ -n "$input_file" ]]; then
+      poetry run app-hound -i "$input_file"
+    elif [[ -n "$output_file" ]]; then
+      poetry run app-hound -o "$output_file"
+    else
+      poetry run app-hound
+    fi
+    cd -
+}
 
 # List all available custom commands
 my-commands() {
   echo "Available custom commands:"
   echo "  oprc         - Open your shell config file (.zshrc or .bashrc)"
   echo "  aider-chat   - Run aider on an Ollama model (with optional file watching)"
+  echo "  app-hound    - Run app-hound to audit an application installed on your system"
   echo "  my-commands  - List available custom user commands"
   echo ""
   echo "Type '<command> --help' for usage information."
 }
+
+
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
