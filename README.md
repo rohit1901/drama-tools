@@ -98,7 +98,7 @@ aider-chat mistral:7b -w  # watch files for changes
 |---------|-------------|-------|
 | `oprc` | Opens the current shell profile (`.bashrc` or `.zshrc`) in an editor. | `oprc` <br> `oprc -s=zsh -i=code` |
 | `aider-chat` | Launches `aider` against a local Ollama model. | `aider-chat` <br> `aider-chat gemma3 -w` |
-| `app-hound` | Run `app-hound` to audit an application installed on your system | `app-hound [-h] [-i INPUT] [-o OUTPUT]` |
+| `app-hound` | Run `app-hound` to audit an application installed on your system | `app-hound [-h] [-i INPUT] [-o OUTPUT]` <br> `app-hound` |
 | `my-commands` | Lists all available helper commands. | `my-commands` |
 
 > All commands accept `-h` or `--help` to show detailed usage.
