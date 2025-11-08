@@ -14,6 +14,7 @@ All of the files live under the `tools/` directory and can be copied into your o
 ├── bash.bashrc         # Custom commands for Bash users
 ├── zsh.zshrc           # Custom commands for Zsh users
 ├── zed.settings.json   # Default settings for Zed editor
+├── zed.keymap.json     # Default keymap for Zed editor
 ├── homebrew/           # Homebrew casks and formulae
 ├── .gitattributes
 ├── .gitignore
@@ -21,9 +22,11 @@ All of the files live under the `tools/` directory and can be copied into your o
 ```
 
 - `bash.bashrc` & `zsh.zshrc` provide three helper commands:
-  *`oprc`* – open the current shell profile in your favourite editor.
-  *`aider-chat`* – launch `aider` against an Ollama model (with optional file‑watching).
-  *`my-commands`* – list the available helpers.
+  - *`oprc`* - open the current shell profile in your favourite editor.
+  - *`aider-chat`* - launch `aider` against an Ollama model (with optional file‑watching).
+  - *`app-hound`* - Run app-hound to audit an application installed on your system
+  - *`my-commands`* - list the available helpers.
+
 
 - `homebrew/formulae.json` is a list of Home‑brew formulae that I keep on my machine.
 - `homebrew/casks.json` is a list of Home‑brew casks that I keep on my machine.
@@ -33,6 +36,7 @@ All of the files live under the `tools/` directory and can be copied into your o
 - `homebrew/brew.export.sh` is a script to export Homebrew formulae and casks.
 
 - `zed.settings.json` contains a sane default configuration for the [Zed](https://zed.dev/) editor.
+- `zed.keymap.json` contains a sane default keymap for the [Zed](https://zed.dev/) editor.
 
 ---
 
@@ -65,7 +69,8 @@ cp drama-tools/tools/zsh.zshrc ~/.zshrc
 ### 4️⃣ Configure Zed
 
 ```sh
-cp drama-tools/tools/zed.settings.json ~/.config/zed/zed.settings.json
+cp drama-tools/tools/zed.settings.json ~/.config/zed/settings.json
+cp drama-tools/tools/zed.keymap.json ~/.config/zed/keymap.json
 ```
 
 > Zed will automatically pick up the settings on the next launch.
@@ -93,6 +98,7 @@ aider-chat mistral:7b -w  # watch files for changes
 |---------|-------------|-------|
 | `oprc` | Opens the current shell profile (`.bashrc` or `.zshrc`) in an editor. | `oprc` <br> `oprc -s=zsh -i=code` |
 | `aider-chat` | Launches `aider` against a local Ollama model. | `aider-chat` <br> `aider-chat gemma3 -w` |
+| `app-hound` | Run `app-hound` to audit an application installed on your system | `app-hound [-h] [-i INPUT] [-o OUTPUT]` |
 | `my-commands` | Lists all available helper commands. | `my-commands` |
 
 > All commands accept `-h` or `--help` to show detailed usage.
