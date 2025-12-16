@@ -23,48 +23,115 @@ export OLLAMA_API_BASE="http://127.0.0.1:11434"
 
 # Open shell profile using `oprc` command
 oprc() {
-  local default_shell=$(basename "$SHELL")
+  local default_shell="$(basename "${SHELL:-}")"
   local default_ide="TextEdit"
-  local selected_shell="$default_shell"
-  local selected_ide="$default_ide"
+  local selected_shell="${default_shell}"
+  local selected_ide="${default_ide}"
 
-  for arg in "$@"; do
-    case "$arg" in
+  _oprc_usage() {
+      cat <<'EOF'
+  ╭──────────────────────────────────────────────╮
+  │ 🎯  oprc — Open Profile Rapid Command        │
+  ╰──────────────────────────────────────────────╯
+
+  Usage:
+    oprc [options]
+
+  Options:
+    -s, --shell <shell>        🐚 Pick which shell profile to pop open (zsh | bash).
+    -i, --interactive <ide>    🛠  Launch the profile with your editor of choice.
+    -h, --help                 📖 Summon this guide on demand.
+
+  Examples:
+    🚀 oprc
+        Opens your current shell profile in TextEdit.
+
+    🧪 oprc -s bash
+        Opens ~/.bashrc in TextEdit.
+
+    🎨 oprc --interactive "Visual Studio Code"
+        Opens your current shell profile in VS Code.
+
+    🧩 oprc -s zsh -i "Sublime Text"
+        Opens ~/.zshrc in Sublime Text.
+EOF
+    }
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
       -h|--help)
-        echo "Usage: oprc <option>=<value>"
-        echo "Options:"
-        echo "  -s|--shell=<shell>        Specify the shell (zsh or bash). Defaults to current shell."
-        echo "  -i|--interactive=<ide>    Specify the IDE (opens the IDE if found). Defaults to TextEdit."
-        echo "Examples:"
-        echo "  oprc                      # opens your current shell's profile in default IDE"
-        echo "  oprc -s=bash              # opens .bashrc in default IDE"
-        echo "  oprc -i=code              # opens current shell's profile in VS Code"
-        echo "  oprc -s=zsh -i=code       # opens .zshrc in VS Code"
-        echo "  oprc --help               # shows this message"
-        return
+        _oprc_usage
+        return 0
         ;;
       -s=*|--shell=*)
-        selected_shell=$(basename "${arg#*=}")
+        selected_shell="$(basename "${1#*=}")"
+        shift
+        ;;
+      -s|--shell)
+        if [[ -n "${2:-}" ]]; then
+          selected_shell="$(basename "$2")"
+          shift 2
+        else
+          echo "oprc Error: missing value for $1 option." >&2
+          return 2
+        fi
         ;;
       -i=*|--interactive=*)
-        selected_ide="${arg#*=}"
+        selected_ide="${1#*=}"
+        shift
+        ;;
+      -i|--interactive)
+        if [[ -n "${2:-}" ]]; then
+          selected_ide="$2"
+          shift 2
+        else
+          echo "oprc Error: missing value for $1 option." >&2
+          return 2
+        fi
+        ;;
+      *)
+        echo "oprc Error: unknown option '$1'. See 'oprc --help' for usage." >&2
+        return 2
         ;;
     esac
   done
-  # Open selected shell's profile in selected IDE
-  case "$selected_shell" in
-    zsh)
-      open -a "$selected_ide" "$HOME/.zshrc"
-      ;;
-    bash)
-      open -a "$selected_ide" "$HOME/.bashrc"
-      ;;
+
+  if [[ -z "${selected_shell}" ]]; then
+    echo "oprc Error: shell option cannot be empty." >&2
+    return 2
+  fi
+
+  local profile_file
+  case "${selected_shell}" in
+    zsh)  profile_file="${HOME}/.zshrc" ;;
+    bash) profile_file="${HOME}/.bashrc" ;;
     *)
-      echo "oprc Error: shell must be 'bash' or 'zsh'. Got: '$selected_shell'"
-      return 1
+      echo "oprc Error: shell must be 'bash' or 'zsh'. Got '${selected_shell}'." >&2
+      return 2
       ;;
   esac
+
+  if [[ ! -f "${profile_file}" ]]; then
+    echo "oprc Error: profile file '${profile_file}' not found." >&2
+    return 3
+  fi
+
+  if ! command -v open >/dev/null 2>&1; then
+    echo "oprc Error: 'open' command is not available on this system." >&2
+    return 127
+  fi
+
+  if ! open -Ra "${selected_ide}" >/dev/null 2>&1; then
+    echo "oprc Error: application '${selected_ide}' could not be located." >&2
+    return 4
+  fi
+
+  if ! open -a "${selected_ide}" "${profile_file}"; then
+    echo "oprc Error: failed to open '${profile_file}' with '${selected_ide}'." >&2
+    return 5
+  fi
 }
+
 
 
 # aider CLI command to launch ollama models
@@ -215,16 +282,19 @@ app-hound() {
 
 # List all available custom commands
 my-commands() {
-  echo "Available custom commands:"
-  echo "  oprc         - Open your shell config file (.zshrc or .bashrc)"
-  echo "  aider-chat   - Run aider on an Ollama model (with optional file watching)"
-  echo "  app-hound    - Run app-hound to audit an application installed on your system"
-  echo "  jdbrowser    - Run JDBrowser to explore SQLLite databases. INFO: Run the command from the directory where the database is located."
-  echo "  my-commands  - List available custom user commands"
-  echo ""
-  echo "Type '<command> --help' for usage information."
-}
+    cat <<'EOF'
+    ╭─────────────────────────────╮
+    │ 🎛️  Custom Command Palette   │
+    ╰─────────────────────────────╯
+    🔧  oprc         Open your shell profile in style (try --help for tips)
+    🤖  aider-chat   Chat with Ollama-backed aider (supports --watch-files)
+    🐾  app-hound    Audit apps via app-hound from $APP_HOUND_ROOT
+    🗃️  jdbrowser    Browse SQLite databases (run where the DB lives)
+    📚  my-commands   You’re here—your custom command cheat sheet!
 
+    💡 Pro tip: tack on --help to any command for the deluxe tour.
+EOF
+}
 
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
