@@ -179,70 +179,59 @@ app-hound() {
   emulate -L zsh
   setopt noglob
 
-  local root="${APP_HOUND_ROOT:-$HOME/.app-hound}"
-  if [[ ! -d $root ]]; then
+  local root=${APP_HOUND_ROOT:-$HOME/.app-hound}
+  [[ -d $root ]] || {
     print -P "%F{red}✖%f APP_HOUND_ROOT not found at %B${root}%b"
     return 1
-  fi
+  }
 
-  local cli="poetry run app-hound"
-  [[ -n ${APP_HOUND_CLI:-} ]] && cli="${APP_HOUND_CLI}"
-
-  local -a base_cmd
-  base_cmd=(${=cli})
-  if ! command -v "${base_cmd[1]}" >/dev/null 2>&1; then
-    print -P "%F{red}✖%f Unable to locate %B${base_cmd[1]}%b"
+  local -a cmd=( ${(z)${APP_HOUND_CLI:-"poetry run app-hound"}} )
+  command -v "${cmd[1]}" >/dev/null 2>&1 || {
+    print -P "%F{red}✖%f Unable to locate %B${cmd[1]}%b"
     return 127
-  fi
+  }
 
-  local dry_run=0 app_name="" input_file="" output_file=""
+  local dry_run=0 input_file="" output_file="" app_name=""
   local -a passthrough=()
-  local argv=("$@")
-  local i=1
 
-  while (( i <= ${#argv[@]} )); do
-    local arg="${argv[i]}"
-    case "$arg" in
+  while [[ $# -gt 0 ]]; do
+    case $1 in
       --dry-run)
         dry_run=1
         ;;
       -i|--input)
-        (( i + 1 <= ${#argv[@]} )) && input_file="${argv[i+1]}" && ((i++))
+        shift; input_file=$1
         ;;
       -o|--output)
-        (( i + 1 <= ${#argv[@]} )) && output_file="${argv[i+1]}" && ((i++))
+        shift; output_file=$1
         ;;
       -a|--app-name)
-        (( i + 1 <= ${#argv[@]} )) && app_name="${argv[i+1]}" && ((i++))
-        ;;
-      --app-name=*)
-        app_name="${arg#*=}"
+        shift; app_name=$1
         ;;
       --input=*)
-        input_file="${arg#*=}"
+        input_file=${1#*=}
         ;;
       --output=*)
-        output_file="${arg#*=}"
+        output_file=${1#*=}
+        ;;
+      --app-name=*)
+        app_name=${1#*=}
         ;;
       --)
-        passthrough+=("${argv[@]:i+1}")
+        shift
+        passthrough+=("$@")
         break
         ;;
       -*)
-        passthrough+=("$arg")
+        passthrough+=("$1")
         ;;
       *)
-        if [[ -z $app_name ]]; then
-          app_name="$arg"
-        else
-          passthrough+=("$arg")
-        fi
+        [[ -z $app_name ]] && app_name=$1 || passthrough+=("$1")
         ;;
     esac
-    ((i++))
+    shift
   done
 
-  local -a cmd=("${base_cmd[@]}")
   [[ -n $input_file  ]] && cmd+=(--input "$input_file")
   [[ -n $output_file ]] && cmd+=(--output "$output_file")
   [[ -n $app_name    ]] && cmd+=(--app-name "$app_name")
@@ -256,10 +245,11 @@ app-hound() {
   builtin pushd "$root" >/dev/null || return 1
   print -P "%F{green}🐾 trail:%f %B${(j: :)cmd}%b"
   "${cmd[@]}"
-  local status=$?
+  local rc=$?
   builtin popd >/dev/null
-  return $status
+  return $rc
 }
+
 
 
 
