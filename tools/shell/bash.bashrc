@@ -1,20 +1,3 @@
-export PATH="$HOME/.volta/bin:$PATH"
-
-# Python environment using pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
-# Node.js environment using nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$(brew --prefix nvm)/nvm.sh" ] && \. "$(brew --prefix nvm)/nvm.sh"
-[ -s "$(brew --prefix nvm)/etc/bash_completion.d/nvm" ] && \. "$(brew --prefix nvm)/etc/bash_completion.d/nvm"
-
-# JDBrowser - SQLLite explorer
-export JD_BROWSER_ROOT="$HOME/work/utilities/JDbrowser/target/release"
-export PATH="$JD_BROWSER_ROOT:$PATH"
-
 # app-hound ROOT
 export APP_HOUND_ROOT="$HOME/work/projects/private/app-hound"
 
@@ -295,8 +278,3 @@ my-commands() {
     💡 Pro tip: tack on --help to any command for the deluxe tour.
 EOF
 }
-
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

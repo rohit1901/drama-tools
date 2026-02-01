@@ -11,32 +11,36 @@ All of the files live under the `tools/` directory and can be copied into your o
 ```drama-tools/tools#L1-100
 # tools/
 │
-├── bash.bashrc         # Custom commands for Bash users
-├── zsh.zshrc           # Custom commands for Zsh users
-├── zed.settings.json   # Default settings for Zed editor
-├── zed.keymap.json     # Default keymap for Zed editor
-├── homebrew/           # Homebrew casks and formulae
+├── shell/                      # Shell profiles for Bash and Zsh
+│   ├── bash.bashrc             # Custom commands for Bash users
+│   └── zsh.zshrc               # Custom commands for Zsh users
+├── zed/                        # Zed editor configurations
+│   ├── zed.settings.json       # Default settings for Zed editor
+│   └── zed.keymap.json         # Default keymap for Zed editor
+├── homebrew/                   # Homebrew casks and formulae
+│   ├── brew.manager.sh         # Unified script to export and install Homebrew dependencies
+│   ├── generated/              # Generated files for Homebrew dependencies
+│   │   ├── casks.json          # Exported casks in JSON format
+│   │   ├── casks.txt           # Exported casks in plain text
+│   │   ├── formulae.json       # Exported formulae in JSON format
+│   │   └── formulae.txt        # Exported formulae in plain text
 ├── .gitattributes
 ├── .gitignore
 └── README.md
 ```
 
-- `bash.bashrc` & `zsh.zshrc` provide three helper commands:
+- `shell/bash.bashrc` & `shell/zsh.zshrc` provide three helper commands:
   - *`oprc`* - open the current shell profile in your favourite editor.
   - *`aider-chat`* - launch `aider` against an Ollama model (with optional file‑watching).
   - *`app-hound`* - Run app-hound to audit an application installed on your system
   - *`my-commands`* - list the available helpers.
 
 
-- `homebrew/formulae.json` is a list of Home‑brew formulae that I keep on my machine.
-- `homebrew/casks.json` is a list of Home‑brew casks that I keep on my machine.
-- `homebrew/formulae.txt` is a list of Home‑brew formulae that I keep on my machine.
-- `homebrew/casks.txt` is a list of Home‑brew casks that I keep on my machine.
-- `homebrew/brew.install.sh` is a script to install Homebrew formulae and casks.
-- `homebrew/brew.export.sh` is a script to export Homebrew formulae and casks.
+- `homebrew/brew.manager.sh` is a unified script to export and install Homebrew dependencies.
+- `generated/` contains dynamically generated files for Homebrew dependencies (`casks.json`, `casks.txt`, `formulae.json`, `formulae.txt`).
 
-- `zed.settings.json` contains a sane default configuration for the [Zed](https://zed.dev/) editor.
-- `zed.keymap.json` contains a sane default keymap for the [Zed](https://zed.dev/) editor.
+- `zed/zed.settings.json` contains a sane default configuration for the [Zed](https://zed.dev/) editor.
+- `zed/zed.keymap.json` contains a sane default keymap for the [Zed](https://zed.dev/) editor.
 
 ---
 
@@ -48,29 +52,35 @@ All of the files live under the `tools/` directory and can be copied into your o
 git clone https://github.com/your-username/drama-tools.git
 ```
 
-### 2️⃣ Install Homebrew dependencies
+### 2️⃣ Export and Install Homebrew Dependencies
+
+To export all your Homebrew dependencies (formulae and casks) to the `generated` folder, run:
 
 ```sh
-brew bundle --file=drama-tools/tools/homebrew/formulae.txt
-brew bundle --file=drama-tools/tools/homebrew/casks.txt
+./drama-tools/tools/homebrew/brew.manager.sh export
 ```
 
-> **Tip:** If you use a different Home‑brew directory or want to keep this repo separate from your own formulae, copy the file to the root of the Home‑brew directory and run `brew bundle` from there.
-
-### 3️⃣ Copy shell helpers
+To install all dependencies from the `generated` folder, run:
 
 ```sh
-cp drama-tools/tools/bash.bashrc ~/.bashrc
-cp drama-tools/tools/zsh.zshrc ~/.zshrc
+./drama-tools/tools/homebrew/brew.manager.sh install
 ```
 
-> After copying, restart your terminal or run `source ~/.bashrc` / `source ~/.zshrc`.
+> **Tip:** The `brew.manager.sh` script simplifies the process by handling both export and install operations in a single command.
+
+### 3️⃣ Run the setup script
+
+```sh
+./drama-tools/setup.sh
+```
+
+> The `setup.sh` script automatically detects your shell type (Bash or Zsh) and links the appropriate shell profile (`bash.bashrc` or `zsh.zshrc`) to your shell configuration file. It also reloads the shell configuration for you.
 
 ### 4️⃣ Configure Zed
 
 ```sh
-cp drama-tools/tools/zed.settings.json ~/.config/zed/settings.json
-cp drama-tools/tools/zed.keymap.json ~/.config/zed/keymap.json
+cp drama-tools/tools/zed/zed.settings.json ~/.config/zed/settings.json
+cp drama-tools/tools/zed/zed.keymap.json ~/.config/zed/keymap.json
 ```
 
 > Zed will automatically pick up the settings on the next launch.
@@ -114,7 +124,7 @@ This project is licensed under the MIT License – see the `LICENSE` file for de
 ## 👀 Quick Start Checklist
 
 1. [ ] Clone repo
-2. [ ] `brew bundle`
+2. [ ] Export and install Homebrew dependencies
 3. [ ] Copy shell scripts
 4. [ ] Copy Zed settings
 5. [ ] (Optional) Start Ollama and pull a model
