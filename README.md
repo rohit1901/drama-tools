@@ -29,10 +29,10 @@ All of the files live under the `tools/` directory and can be copied into your o
 └── README.md
 ```
 
-- `shell/bash.bashrc` & `shell/zsh.zshrc` provide three helper commands:
+- `shell/bash.bashrc` & `shell/zsh.zshrc` provide helper commands:
   - *`oprc`* - open the current shell profile in your favourite editor.
-  - *`aider-chat`* - launch `aider` against an Ollama model (with optional file‑watching).
   - *`app-hound`* - Run app-hound to audit an application installed on your system
+  - *`brew-manager`* - export or install Homebrew dependencies (wraps `brew.manager.sh`)
   - *`my-commands`* - list the available helpers.
 
 
@@ -85,21 +85,6 @@ cp drama-tools/tools/zed/zed.keymap.json ~/.config/zed/keymap.json
 
 > Zed will automatically pick up the settings on the next launch.
 
-### 5️⃣ Install Ollama & models (if you want `aider-chat`)
-
-```sh
-brew install ollama
-ollama serve   # start the server
-ollama pull llama3.2:3b   # or any other model you prefer
-```
-
-Now you can run:
-
-```sh
-aider-chat          # launches default model (llama3.2:3b)
-aider-chat mistral:7b -w  # watch files for changes
-```
-
 ---
 
 ## 📘 Custom Commands Overview
@@ -107,8 +92,8 @@ aider-chat mistral:7b -w  # watch files for changes
 | Command | Description | Usage |
 |---------|-------------|-------|
 | `oprc` | Opens the current shell profile (`.bashrc` or `.zshrc`) in an editor. | `oprc` <br> `oprc -s=zsh -i=code` |
-| `aider-chat` | Launches `aider` against a local Ollama model. | `aider-chat` <br> `aider-chat gemma3 -w` |
 | `app-hound` | Run `app-hound` to audit an application installed on your system | `app-hound [-h] [-i INPUT] [-o OUTPUT]` <br> `app-hound` |
+| `brew-manager` | Export or install Homebrew dependencies (casks and formulae) | `brew-manager export` <br> `brew-manager install` |
 | `my-commands` | Lists all available helper commands. | `my-commands` |
 
 > All commands accept `-h` or `--help` to show detailed usage.
@@ -127,7 +112,6 @@ This project is licensed under the MIT License – see the `LICENSE` file for de
 2. [ ] Export and install Homebrew dependencies
 3. [ ] Copy shell scripts
 4. [ ] Copy Zed settings
-5. [ ] (Optional) Start Ollama and pull a model
-6. [ ] Enjoy your streamlined dev environment
+5. [ ] Enjoy your streamlined dev environment
 
 Feel free to customize the shell scripts or add new Home‑brew formulae as your workflow evolves. Happy coding!

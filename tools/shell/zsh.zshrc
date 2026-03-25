@@ -1,8 +1,11 @@
+# Drama Tools ROOT
+export DRAMA_TOOLS_ROOT="$HOME/work/projects/private/drama-tools"
+
 # app-hound ROOT
 export APP_HOUND_ROOT="$HOME/work/projects/private/app-hound"
 
-# Ollama
-export OLLAMA_API_BASE="http://127.0.0.1:11434"
+
+
 
 # Open shell profile using `oprc` command
 oprc() {
@@ -117,62 +120,7 @@ EOF
 
 
 
-# aider CLI command to launch ollama models
-aider-chat() {
 
-  local model="llama3.2:3b"
-  local watch_flag=""
-
-  # Parse arguments (model name and watch flag)
-  for arg in "$@"; do
-    case "$arg" in
-      -h|--help)
-        echo "Usage: aider-chat [model] <options>"
-        echo "  model: ollama model name (e.g., llama3.2:3b, mistral:7b)"
-        echo "  If omitted, defaults to llama3.2:3b"
-        echo "  options:"
-        echo "    -w | --watch-files: watch for files in the current directory"
-        echo "Examples:"
-        echo "  aider-chat             # uses llama3.2:3b"
-        echo "  aider-chat gemma3      # uses gemma3 if installed"
-        echo "  aider-chat -w          # uses llama3.2:3b, with watch files"
-        echo "  aider-chat gemma3 -w   # uses gemma3, with watch files"‚
-        return
-        ;;
-      -w|--watch-files)
-        watch_flag="--watch-files"
-        ;;
-      -*)
-        # ignore other options
-        ;;
-      *)
-        # If model not yet set by user, set it now
-        if [[ "$model" == "llama3.2:3b" ]]; then
-          model="$arg"
-        fi
-        ;;
-    esac
-  done
-  # Throw error if Ollama is not running
-  if ! curl -s http://localhost:11434 > /dev/null; then
-    echo "aider-chat Error: Ollama server is not running."
-    echo "Start it with: ollama serve"
-    return 1
-  fi
-
-  # Validate if model exists locally
-  if ollama list | awk '{print $1}' | grep -Fxq "$model"; then
-    if [[ -n "$watch_flag" ]]; then
-      aider --model "ollama_chat/$model" $watch_flag
-    else
-      aider --model "ollama_chat/$model"
-    fi
-  else
-    echo "aider-chat Error: Model '$model' does not exist locally."
-    echo "Use 'ollama list' to view available models."
-    return 2
-  fi
-}
 
 # app-hound command to run app-hound [-h] [-i INPUT] [-o OUTPUT] [-a APP]
 app-hound() {
@@ -253,6 +201,53 @@ app-hound() {
 
 
 
+# brew-manager command to export or install Homebrew dependencies
+brew-manager() {
+  local root="${DRAMA_TOOLS_ROOT:-$HOME/work/projects/private/drama-tools}"
+
+  if [[ ! -d "$root" ]]; then
+    echo "brew-manager Error: DRAMA_TOOLS_ROOT not found at '$root'" >&2
+    return 1
+  fi
+
+  local script="$root/tools/homebrew/brew.manager.sh"
+
+  if [[ ! -f "$script" ]]; then
+    echo "brew-manager Error: Script not found at '$script'" >&2
+    return 1
+  fi
+
+  # Show help if no arguments or -h/--help
+  if [[ $# -eq 0 ]] || [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
+    cat <<'EOF'
+╭──────────────────────────────────────────────╮
+│ 🍺  brew-manager — Homebrew Dependency Tool  │
+╰──────────────────────────────────────────────╯
+
+Usage:
+  brew-manager [command]
+
+Commands:
+  export     Export all Homebrew dependencies to generated folder
+  install    Install all Homebrew dependencies from generated folder
+  -h, --help Show this help message
+
+Examples:
+  🚀 brew-manager export
+      Exports all installed casks and formulae to JSON and text files
+
+  📦 brew-manager install
+      Installs all dependencies from the generated folder
+
+EOF
+    return 0
+  fi
+
+  # Execute the brew.manager.sh script
+  bash "$script" "$@"
+}
+
+
 # List all available custom commands
 my-commands() {
     cat <<'EOF'
@@ -260,10 +255,10 @@ my-commands() {
     │ 🎛️  Custom Command Palette   │
     ╰─────────────────────────────╯
     🔧  oprc         Open your shell profile in style (try --help for tips)
-    🤖  aider-chat   Chat with Ollama-backed aider (supports --watch-files)
     🐾  app-hound    Audit apps via app-hound from $APP_HOUND_ROOT
-    🗃️  jdbrowser    Browse SQLite databases (run where the DB lives)
-    📚  my-commands   You’re here—your custom command cheat sheet!
+    🍺  brew-manager Export or install Homebrew dependencies
+    🗃️  lazysql      Browse SQL databases with lazysql
+    📚  my-commands   You're here—your custom command cheat sheet!
 
     💡 Pro tip: tack on --help to any command for the deluxe tour.
 EOF
