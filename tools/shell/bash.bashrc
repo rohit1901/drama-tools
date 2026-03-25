@@ -256,18 +256,75 @@ EOF
 }
 
 
+# zed-manager command to export or install Zed editor configurations
+zed-manager() {
+  local root="${DRAMA_TOOLS_ROOT:-$HOME/work/projects/private/drama-tools}"
+
+  if [[ ! -d "$root" ]]; then
+    echo "zed-manager Error: DRAMA_TOOLS_ROOT not found at '$root'" >&2
+    return 1
+  fi
+
+  local script="$root/tools/zed/zed.manager.sh"
+
+  if [[ ! -f "$script" ]]; then
+    echo "zed-manager Error: Script not found at '$script'" >&2
+    return 1
+  fi
+
+  # Show help if no arguments or -h/--help
+  if [[ $# -eq 0 ]] || [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
+    cat <<'EOF'
+╭──────────────────────────────────────────────╮
+│ ⚡ zed-manager — Zed Editor Config Tool      │
+╰──────────────────────────────────────────────╯
+
+Usage:
+  zed-manager [command]
+
+Commands:
+  export     Export Zed configurations from ~/.config/zed
+  install    Install Zed configurations to ~/.config/zed
+  -h, --help Show this help message
+
+Examples:
+  🚀 zed-manager export
+      Exports settings.json and keymap.json to tools/zed
+
+  📦 zed-manager install
+      Installs configurations from tools/zed to ~/.config/zed
+
+EOF
+    return 0
+  fi
+
+  # Execute the zed.manager.sh script
+  bash "$script" "$@"
+}
+
+
 # List all available custom commands
 my-commands() {
-    cat <<'EOF'
-    ╭─────────────────────────────╮
-    │ 🎛️  Custom Command Palette   │
-    ╰─────────────────────────────╯
-    🔧  oprc         Open your shell profile in style (try --help for tips)
-    🐾  app-hound    Audit apps via app-hound from $APP_HOUND_ROOT
-    🍺  brew-manager Export or install Homebrew dependencies
-    🗃️  lazysql      Browse SQL databases with lazysql
-    📚  my-commands   You're here—your custom command cheat sheet!
+    echo "    ╭─────────────────────────────╮"
+    echo "    │ 🎛️  Custom Command Palette  │"
+    echo "    ╰─────────────────────────────╯"
+    echo "    🔧  oprc         Open your shell profile in style (try --help for tips)"
+    echo "    🐾  app-hound    Audit apps via app-hound from $APP_HOUND_ROOT"
+    echo "    🍺  brew-manager Export or install Homebrew dependencies"
+    echo "    ⚡  zed-manager  Export or install Zed editor configurations"
 
-    💡 Pro tip: tack on --help to any command for the deluxe tour.
-EOF
+    # Show lazy* tools if installed
+    if command -v lazygit >/dev/null 2>&1; then
+        echo "    🐙  lazygit      Terminal UI for git commands"
+    fi
+    if command -v lazysql >/dev/null 2>&1; then
+        echo "    🗃️  lazysql      Browse SQL databases with lazysql"
+    fi
+    if command -v lazydocker >/dev/null 2>&1; then
+        echo "    🐳  lazydocker   Terminal UI for docker and docker-compose"
+    fi
+
+    echo "    📚  my-commands   You're here—your custom command cheat sheet!"
+    echo ""
+    echo "    💡 Pro tip: tack on --help to any command for the deluxe tour."
 }

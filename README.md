@@ -33,12 +33,14 @@ All of the files live under the `tools/` directory and can be copied into your o
   - *`oprc`* - open the current shell profile in your favourite editor.
   - *`app-hound`* - Run app-hound to audit an application installed on your system
   - *`brew-manager`* - export or install Homebrew dependencies (wraps `brew.manager.sh`)
+  - *`zed-manager`* - export or install Zed editor configurations (wraps `zed.manager.sh`)
   - *`my-commands`* - list the available helpers.
 
 
 - `homebrew/brew.manager.sh` is a unified script to export and install Homebrew dependencies.
 - `generated/` contains dynamically generated files for Homebrew dependencies (`casks.json`, `casks.txt`, `formulae.json`, `formulae.txt`).
 
+- `zed/zed.manager.sh` is a unified script to export and install Zed editor configurations.
 - `zed/zed.settings.json` contains a sane default configuration for the [Zed](https://zed.dev/) editor.
 - `zed/zed.keymap.json` contains a sane default keymap for the [Zed](https://zed.dev/) editor.
 
@@ -79,11 +81,10 @@ To install all dependencies from the `generated` folder, run:
 ### 4️⃣ Configure Zed
 
 ```sh
-cp drama-tools/tools/zed/zed.settings.json ~/.config/zed/settings.json
-cp drama-tools/tools/zed/zed.keymap.json ~/.config/zed/keymap.json
+zed-manager install
 ```
 
-> Zed will automatically pick up the settings on the next launch.
+> The `zed-manager` command automatically installs Zed settings and keymap to `~/.config/zed`. Zed will pick up the new settings immediately.
 
 ---
 
@@ -94,9 +95,15 @@ cp drama-tools/tools/zed/zed.keymap.json ~/.config/zed/keymap.json
 | `oprc` | Opens the current shell profile (`.bashrc` or `.zshrc`) in an editor. | `oprc` <br> `oprc -s=zsh -i=code` |
 | `app-hound` | Run `app-hound` to audit an application installed on your system | `app-hound [-h] [-i INPUT] [-o OUTPUT]` <br> `app-hound` |
 | `brew-manager` | Export or install Homebrew dependencies (casks and formulae) | `brew-manager export` <br> `brew-manager install` |
+| `zed-manager` | Export or install Zed editor configurations (settings and keymap) | `zed-manager export` <br> `zed-manager install` |
 | `my-commands` | Lists all available helper commands. | `my-commands` |
 
 > All commands accept `-h` or `--help` to show detailed usage.
+
+**Note:** The `my-commands` output will also dynamically include the following tools if they are installed:
+- `lazygit` - Terminal UI for git commands
+- `lazysql` - Browse SQL databases with lazysql
+- `lazydocker` - Terminal UI for docker and docker-compose
 
 ---
 
