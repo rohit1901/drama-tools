@@ -17,24 +17,18 @@ export function makeExportCommand(): Command {
 
       // RTK status
       if (isRtkInstalled(config)) {
-        console.log('  ✓ RTK     installed (present in opencode.json plugins)');
-        const pluginCfg = config.pluginConfig as Record<string, unknown> | undefined;
-        if (pluginCfg?.['@opencode/plugin-rtk']) {
-          console.log('           pluginConfig present');
-        }
+        console.log('  ✓ RTK      installed (present in opencode.json plugin array)');
       } else {
-        console.log('  ✗ RTK     not installed');
+        console.log('  ✗ RTK      not installed');
       }
 
       // Caveman status
       if (isCavemanInstalled(configDir)) {
-        console.log('  ✓ Caveman installed (skills/caveman.md present)');
+        console.log('  ✓ Caveman  installed (skills/caveman.md present)');
       } else {
-        console.log('  ✗ Caveman not installed');
+        console.log('  ✗ Caveman  not installed');
       }
 
-      console.log('');
-      console.log('  Run `opencode-manager install` to install missing tools.');
       console.log('');
     });
 }
