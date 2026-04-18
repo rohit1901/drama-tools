@@ -17,5 +17,5 @@ export function resolveConfigDir(dirFlag?: string): string {
 
 export const OPENCODE_JSON = 'opencode.json';
 export const SKILLS_DIR = 'skills';
-export const RTK_PLUGIN_NAME = '@opencode/plugin-rtk';
+export const RTK_PLUGIN_NAME = 'openrtk';
 export const CAVEMAN_SKILL_FILE = 'caveman.md';
