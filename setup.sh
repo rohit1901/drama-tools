@@ -3,7 +3,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# ─── Shell setup ─────────────────────────────────────────────────────────────
+# ─── Shell setup ──────────────────────────────────────────────────────────
 _setup_shell() {
   SHELL_TYPE=$(basename "$SHELL")
   if [ "$SHELL_TYPE" = "zsh" ]; then
@@ -33,7 +33,7 @@ _setup_shell() {
   echo "Setup complete! The functions from $SOURCE_FILE are now available in your shell."
 }
 
-# ─── OpenCode setup ──────────────────────────────────────────────────────────
+# ─── OpenCode setup ─────────────────────────────────────────────────────────
 _setup_opencode() {
   OPENCODE_TOOL_DIR="$SCRIPT_DIR/tools/opencode"
 
@@ -45,7 +45,7 @@ _setup_opencode() {
   echo ""
   echo "  Setting up opencode-manager..."
 
-  # ── Prerequisites ──────────────────────────────────────────────────────────
+  # ── Prerequisites ─────────────────────────────────────────────────────────
   if ! command -v node >/dev/null 2>&1; then
     echo "  Error: Node.js is required but not installed."
     echo "  Install Node.js >= 18 from https://nodejs.org and re-run."
@@ -58,7 +58,7 @@ _setup_opencode() {
     exit 1
   fi
 
-  # ── Install RTK via Homebrew ───────────────────────────────────────────────
+  # ── Install RTK via Homebrew ──────────────────────────────────────────────
   if command -v rtk >/dev/null 2>&1; then
     echo "  ✓ rtk already installed — skipping brew install"
   elif command -v brew >/dev/null 2>&1; then
@@ -71,10 +71,10 @@ _setup_opencode() {
 
   # ── Build opencode-manager ─────────────────────────────────────────────────
   echo "  Installing pnpm dependencies..."
-  (cd "$OPENCODE_TOOL_DIR" && pnpm install 
+  (cd "$OPENCODE_TOOL_DIR" && pnpm install)
 
   echo "  Building TypeScript..."
-  (cd "$OPENCODE_TOOL_DIR" && pnpm run build 
+  (cd "$OPENCODE_TOOL_DIR" && pnpm run build)
 
   # ── Run installer ──────────────────────────────────────────────────────────
   echo "  Running opencode-manager install..."
@@ -86,7 +86,7 @@ _setup_opencode() {
   echo ""
 }
 
-# ─── Help ─────────────────────────────────────────────────────────────────────
+# ─── Help ────────────────────────────────────────────────────────────────────
 _show_help() {
   cat <<'EOF'
   drama-tools/setup.sh — environment bootstrap
