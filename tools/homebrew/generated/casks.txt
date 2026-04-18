@@ -1,2 +1,3 @@
+ghostty
+git-credential-manager
 gpg-suite
-maccy
