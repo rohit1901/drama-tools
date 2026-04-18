@@ -79,9 +79,10 @@ opencode/
 │   │   └── rtk.ts          # RTK plugin installer
 │   └── index.ts            # CLI entry point
 ├── package.json
-├── setup.sh                # Build and install script
 └── tsconfig.json
 ```
+
+> Setup is handled by the root `setup.sh opencode` command.
 
 ---
 
