@@ -1,0 +1,28 @@
+{
+  "name": "opencode-manager",
+  "version": "1.0.0",
+  "description": "CLI tool to install and manage RTK and Caveman plugins for OpenCode",
+  "main": "dist/index.js",
+  "bin": {
+    "opencode-manager": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/index.ts",
+    "start": "node dist/index.js"
+  },
+  "keywords": ["opencode", "rtk", "caveman", "drama-tools"],
+  "author": "rohit1901",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^12.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.5.0",
+    "ts-node": "^10.9.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
