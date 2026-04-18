@@ -2,9 +2,14 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { OPENCODE_JSON, RTK_PLUGIN_NAME } from './config';
 
+/**
+ * Matches the OpenCode config schema: https://opencode.ai/config.json
+ * The `plugin` key (singular) is an array of npm package names.
+ * No `plugins` or `pluginConfig` keys exist in the schema.
+ */
 export interface OpencodeJson {
-  plugins?: string[];
-  pluginConfig?: Record<string, unknown>;
+  $schema?: string;
+  plugin?: string[];
   [key: string]: unknown;
 }
 
@@ -37,50 +42,19 @@ export function writeOpencodeJson(configDir: string, data: OpencodeJson): void {
  * Returns true if the RTK plugin is already present in opencode.json.
  */
 export function isRtkInstalled(config: OpencodeJson): boolean {
-  return Array.isArray(config.plugins) && config.plugins.includes(RTK_PLUGIN_NAME);
+  return Array.isArray(config.plugin) && config.plugin.includes(RTK_PLUGIN_NAME);
 }
 
 /**
- * Injects the RTK plugin entry and default pluginConfig into opencode.json.
+ * Adds the RTK plugin to the `plugin` array in opencode.json.
  * Idempotent - safe to call multiple times.
  */
 export function installRtk(configDir: string): { alreadyInstalled: boolean } {
   const config = readOpencodeJson(configDir);
-
   if (isRtkInstalled(config)) {
     return { alreadyInstalled: true };
   }
-
-  config.plugins = [...(config.plugins ?? []), RTK_PLUGIN_NAME];
-
-  if (!config.pluginConfig) {
-    config.pluginConfig = {};
-  }
-
-  if (!config.pluginConfig[RTK_PLUGIN_NAME]) {
-    config.pluginConfig[RTK_PLUGIN_NAME] = {
-      enabled: true,
-      commands: [
-        'git status',
-        'git diff',
-        'ls',
-        'cat',
-        'rg',
-        'grep',
-        'find',
-        'cargo',
-        'docker',
-        'kubectl',
-        'npm test',
-      ],
-      rewriteMap: {
-        cat: 'rtk read',
-        rg: 'rtk grep',
-        eslint: 'rtk lint',
-      },
-    };
-  }
-
+  config.plugin = [...(config.plugin ?? []), RTK_PLUGIN_NAME];
   writeOpencodeJson(configDir, config);
   return { alreadyInstalled: false };
 }
@@ -91,17 +65,10 @@ export function installRtk(configDir: string): { alreadyInstalled: boolean } {
  */
 export function uninstallRtk(configDir: string): { wasInstalled: boolean } {
   const config = readOpencodeJson(configDir);
-
   if (!isRtkInstalled(config)) {
     return { wasInstalled: false };
   }
-
-  config.plugins = (config.plugins ?? []).filter((p) => p !== RTK_PLUGIN_NAME);
-
-  if (config.pluginConfig) {
-    delete config.pluginConfig[RTK_PLUGIN_NAME];
-  }
-
+  config.plugin = (config.plugin ?? []).filter((p) => p !== RTK_PLUGIN_NAME);
   writeOpencodeJson(configDir, config);
   return { wasInstalled: true };
 }
