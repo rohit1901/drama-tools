@@ -71,10 +71,10 @@ _setup_opencode() {
 
   # ── Build opencode-manager ─────────────────────────────────────────────────
   echo "  Installing pnpm dependencies..."
-  (cd "$OPENCODE_TOOL_DIR" && pnpm install --silent)
+  (cd "$OPENCODE_TOOL_DIR" && pnpm install 
 
   echo "  Building TypeScript..."
-  (cd "$OPENCODE_TOOL_DIR" && pnpm run build --silent)
+  (cd "$OPENCODE_TOOL_DIR" && pnpm run build 
 
   # ── Run installer ──────────────────────────────────────────────────────────
   echo "  Running opencode-manager install..."
