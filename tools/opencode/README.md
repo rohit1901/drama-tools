@@ -25,9 +25,9 @@ Or manually:
 
 ```sh
 cd tools/opencode
-npm install
-npm run build
-npm install -g .
+pnpm install
+pnpm run build
+pnpm install -g .
 ```
 
 ## Usage
@@ -90,7 +90,7 @@ Adds the following entry to `opencode.json`:
 }
 ```
 
-OpenCode automatically installs the `openrtk` npm package via Bun at startup. The plugin intercepts shell commands and pipes them through [RTK](https://github.com/rtk-ai/rtk) (Rust Token Killer) for automatic output compression, reducing LLM token consumption by 60-90%.
+OpenCode automatically installs the `openrtk` npm package via pnpm at startup. The plugin intercepts shell commands and pipes them through [RTK](https://github.com/rtk-ai/rtk) (Rust Token Killer) for automatic output compression, reducing LLM token consumption by 60-90%.
 
 ### Caveman Skill
 
@@ -99,6 +99,6 @@ Copies `assets/caveman.md` to `skills/caveman.md`.
 ## Requirements
 
 - Node.js 18+
-- npm
+- pnpm
 - OpenCode installed and configured
-- RTK binary: `cargo install rtk` (required by the openrtk plugin at runtime)
+- RTK binary: `brew install rtk` (required by the openrtk plugin at runtime)
