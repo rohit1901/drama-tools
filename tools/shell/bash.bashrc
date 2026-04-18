@@ -302,6 +302,59 @@ EOF
   bash "$script" "$@"
 }
 
+# opencode-manager command to install RTK and Caveman for OpenCode
+opencode-manager() {
+  local root="${DRAMA_TOOLS_ROOT:-$HOME/work/projects/private/drama-tools}"
+  if [[ ! -d "$root" ]]; then
+    echo "opencode-manager Error: DRAMA_TOOLS_ROOT not found at '$root'" >&2
+    return 1
+  fi
+
+  local cli="$root/tools/opencode/dist/index.js"
+
+  # Show help if no arguments or -h/--help
+  if [[ $# -eq 0 ]] || [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
+    cat <<'EOF'
+╭──────────────────────────────────────────────╮
+│ 🦖 opencode-manager — OpenCode Tool Installer  │
+╰──────────────────────────────────────────────╯
+Usage:
+  opencode-manager [command]
+
+Commands:
+  install     Install RTK plugin and Caveman skill into OpenCode config
+  export      Show current RTK/Caveman installation status
+  -h, --help  Show this help message
+
+Options:
+  --dir <path>      Override the OpenCode config directory
+  --rtk-only        Install only the RTK plugin
+  --caveman-only    Install only the Caveman skill
+
+Examples:
+  🚀 opencode-manager install
+       Installs RTK plugin (opencode.json) and Caveman skill (skills/caveman.md)
+  📦 opencode-manager export
+       Shows installation status of RTK and Caveman
+  📂 opencode-manager install --dir /custom/path
+       Installs into a custom OpenCode config directory
+EOF
+    return 0
+  fi
+
+  # Build if dist/index.js does not exist
+  if [[ ! -f "$cli" ]]; then
+    echo "opencode-manager: dist not found, building..." >&2
+    (cd "$root/tools/opencode" && npm install --silent && npm run build --silent)
+    if [[ $? -ne 0 ]]; then
+      echo "opencode-manager Error: build failed." >&2
+      return 1
+    fi
+  fi
+
+  node "$cli" "$@"
+}
+
 
 # List all available custom commands
 my-commands() {
@@ -312,6 +365,7 @@ my-commands() {
     echo "    🐾  app-hound    Audit apps via app-hound from $APP_HOUND_ROOT"
     echo "    🍺  brew-manager Export or install Homebrew dependencies"
     echo "    ⚡  zed-manager  Export or install Zed editor configurations"
+  echo "  🦖 opencode-manager Install RTK + Caveman for OpenCode"
 
     # Show lazy* tools if installed
     if command -v lazygit >/dev/null 2>&1; then
