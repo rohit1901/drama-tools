@@ -195,5 +195,3 @@ This project is licensed under the MIT License – see the `LICENSE` file for de
 4. [ ] Copy Zed settings
 5. [ ] Set up OpenCode (RTK + Caveman) with `./setup.sh opencode`
 6. [ ] Enjoy your streamlined dev environment
-
-Feel free to customize the shell scripts or add new Home-brew formulae as your workflow evolves. Happy coding!
