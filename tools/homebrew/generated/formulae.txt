@@ -15,7 +15,10 @@ gcc
 gettext
 git
 gmp
+helm
 isl
+kind
+kubernetes-cli
 lazydocker
 lazygit
 lazysql
@@ -25,7 +28,9 @@ libpng
 libssh2
 libunistring
 lima
+llhttp
 llmfit
+llvm
 llvm@21
 lz4
 m4
@@ -43,7 +48,9 @@ pyenv-virtualenv
 python@3.14
 readline
 ripgrep
+rtk
 rust
 sqlite
 xz
+z3
 zstd
