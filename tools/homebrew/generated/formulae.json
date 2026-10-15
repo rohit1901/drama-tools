@@ -11,62 +11,57 @@
   },
   {
     "name": "c-ares",
-    "version": "1.34.6",
+    "version": "1.34.8",
     "tap": "homebrew/core"
   },
   {
     "name": "ca-certificates",
-    "version": "2026-05-14",
+    "version": "2026-09-25",
     "tap": "homebrew/core"
   },
   {
     "name": "certifi",
-    "version": "2026.4.22",
+    "version": "2026.7.22_1",
     "tap": "homebrew/core"
   },
   {
     "name": "cffi",
-    "version": "2.0.0_1",
+    "version": "2.1.1_1",
     "tap": "homebrew/core"
   },
   {
     "name": "colima",
-    "version": "0.10.1",
+    "version": "0.10.3",
     "tap": "homebrew/core"
   },
   {
     "name": "coreutils",
-    "version": "9.11",
+    "version": "9.12",
     "tap": "homebrew/core"
   },
   {
     "name": "docker",
-    "version": "29.5.1",
-    "tap": "homebrew/core"
-  },
-  {
-    "name": "docker-completion",
-    "version": "29.5.1",
+    "version": "29.9.1",
     "tap": "homebrew/core"
   },
   {
     "name": "docker-compose",
-    "version": "5.1.3",
+    "version": "5.6.0",
     "tap": "homebrew/core"
   },
   {
     "name": "freetype",
-    "version": "2.14.3",
+    "version": "2.15.0",
     "tap": "homebrew/core"
   },
   {
     "name": "gawk",
-    "version": "5.4.0",
+    "version": "5.4.1",
     "tap": "homebrew/core"
   },
   {
     "name": "gcc",
-    "version": "15.2.0_1",
+    "version": "16.2.0",
     "tap": "homebrew/core"
   },
   {
@@ -75,8 +70,13 @@
     "tap": "homebrew/core"
   },
   {
+    "name": "gh",
+    "version": "2.102.0",
+    "tap": "homebrew/core"
+  },
+  {
     "name": "git",
-    "version": "2.54.0",
+    "version": "2.56.0_1",
     "tap": "homebrew/core"
   },
   {
@@ -86,22 +86,37 @@
   },
   {
     "name": "helm",
-    "version": "4.2.0",
+    "version": "4.3.1",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "icu4c@78",
+    "version": "78.3",
     "tap": "homebrew/core"
   },
   {
     "name": "isl",
-    "version": "0.27",
+    "version": "0.28",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "json-c",
+    "version": "0.19",
     "tap": "homebrew/core"
   },
   {
     "name": "kind",
-    "version": "0.31.0",
+    "version": "0.33.0",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "krb5",
+    "version": "1.22.2_2",
     "tap": "homebrew/core"
   },
   {
     "name": "kubernetes-cli",
-    "version": "1.36.1",
+    "version": "1.37.1",
     "tap": "homebrew/core"
   },
   {
@@ -111,17 +126,12 @@
   },
   {
     "name": "lazygit",
-    "version": "0.61.1",
-    "tap": "homebrew/core"
-  },
-  {
-    "name": "lazysql",
-    "version": "0.5.0",
+    "version": "0.66.1",
     "tap": "homebrew/core"
   },
   {
     "name": "libgit2",
-    "version": "1.9.3",
+    "version": "1.9.7_2",
     "tap": "homebrew/core"
   },
   {
@@ -131,12 +141,12 @@
   },
   {
     "name": "libpng",
-    "version": "1.6.58",
+    "version": "1.6.59",
     "tap": "homebrew/core"
   },
   {
     "name": "libssh2",
-    "version": "1.11.1_1",
+    "version": "1.11.1_7",
     "tap": "homebrew/core"
   },
   {
@@ -146,27 +156,22 @@
   },
   {
     "name": "lima",
-    "version": "2.1.1",
+    "version": "2.2.1",
     "tap": "homebrew/core"
   },
   {
     "name": "llhttp",
-    "version": "9.4.1",
+    "version": "9.4.3",
     "tap": "homebrew/core"
   },
   {
     "name": "llmfit",
-    "version": "0.9.23",
+    "version": "1.1.17",
     "tap": "homebrew/core"
   },
   {
     "name": "llvm",
-    "version": "22.1.5",
-    "tap": "homebrew/core"
-  },
-  {
-    "name": "llvm@21",
-    "version": "21.1.8",
+    "version": "23.1.3_1",
     "tap": "homebrew/core"
   },
   {
@@ -191,87 +196,87 @@
   },
   {
     "name": "nvm",
-    "version": "0.40.4",
+    "version": "0.40.8",
     "tap": "homebrew/core"
   },
   {
-    "name": "opencode",
-    "version": "1.15.5",
-    "tap": "anomalyco/tap"
+    "name": "openssl@3",
+    "version": "3.5.9",
+    "tap": "homebrew/core"
   },
   {
-    "name": "openssl@3",
-    "version": "3.6.2",
+    "name": "openssl@4",
+    "version": "4.0.3",
     "tap": "homebrew/core"
   },
   {
     "name": "pcre2",
-    "version": "10.47_1",
+    "version": "10.49",
     "tap": "homebrew/core"
   },
   {
     "name": "pkgconf",
-    "version": "2.5.1",
+    "version": "3.0.8",
     "tap": "homebrew/core"
   },
   {
     "name": "poetry",
-    "version": "2.4.1",
+    "version": "2.5.1",
+    "tap": "homebrew/core"
+  },
+  {
+    "name": "postgresql@15",
+    "version": "15.19_1",
     "tap": "homebrew/core"
   },
   {
     "name": "pycparser",
-    "version": "3.0",
+    "version": "3.11",
     "tap": "homebrew/core"
   },
   {
     "name": "pyenv",
-    "version": "2.6.31",
+    "version": "2.8.10",
     "tap": "homebrew/core"
   },
   {
     "name": "pyenv-virtualenv",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "tap": "homebrew/core"
   },
   {
     "name": "python@3.14",
-    "version": "3.14.5",
+    "version": "3.14.8_2",
     "tap": "homebrew/core"
   },
   {
     "name": "readline",
-    "version": "8.3.3",
-    "tap": "homebrew/core"
-  },
-  {
-    "name": "ripgrep",
-    "version": "15.1.0",
+    "version": "8.3.6",
     "tap": "homebrew/core"
   },
   {
     "name": "rtk",
-    "version": "0.40.0",
+    "version": "1.0.1",
     "tap": "homebrew/core"
   },
   {
     "name": "rust",
-    "version": "1.95.0",
+    "version": "1.99.0_1",
     "tap": "homebrew/core"
   },
   {
     "name": "sqlite",
-    "version": "3.53.1",
+    "version": "3.54.0",
     "tap": "homebrew/core"
   },
   {
     "name": "xz",
-    "version": "5.8.3",
+    "version": "5.8.4",
     "tap": "homebrew/core"
   },
   {
     "name": "z3",
-    "version": "4.15.4",
+    "version": "5.1.0",
     "tap": "homebrew/core"
   },
   {
